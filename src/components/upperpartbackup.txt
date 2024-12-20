@@ -1,0 +1,120 @@
+import React, { useState, useEffect } from "react";
+import bg1 from "../assets/bg1.jpeg";
+import { Link } from "react-router-dom";
+
+
+function Projects() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+      const toggleMenu = () => {
+        setIsMenuOpen((prevState) => !prevState); // Toggles the state
+      };
+    return (
+        <div>
+            {/* ---------------------first part starts--------------------- */}
+            <div style={{ backgroundImage: `url(${bg1})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "50vh" }}
+                    className="relative mb-12"
+                >
+
+                {/* Header Navbar */}
+                <div className="flex items-center justify-between p-6">
+                    {/* Logo */}
+                    <div className="flex items-end ml-4 lg:ml-32">
+                        <h1 className="text-2xl lg:text-4xl font-bold text-white">Stagging</h1>
+                        <h2 className="text-3xl lg:text-5xl text-amber-500 ml-1">.</h2>
+                    </div>
+                    {/* Links */}
+                        <div className="hidden lg:flex ml-0 lg:ml-28">
+                            <li className="text-white hover:text-amber-500 cursor-pointer list-none mr-6">
+                        <Link to="/">Home</Link>
+                    </li>
+                        <ul className="flex space-x-3 lg:space-x-6">
+                        {["Projects", "About", "Pages", "Blog", "Contact"].map((item, idx) => (
+                        <li
+                        key={idx}
+                        className="text-white hover:text-amber-500 cursor-pointer"
+                        >
+                        <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+                        </li>
+                    ))}
+                    {/* Add Home separately with a condition */}
+                    
+                    </ul>
+
+                        </div>
+                        {/* Contact Info */}
+                        <div className="hidden sm:block mr-0 lg:mr-24 text-center">
+                        <h1 className="text-gray-400 text-xs lg:text-sm">
+                            Call us for any questions
+                        </h1>
+                        <h2 className="text-amber-500 text-sm lg:text-lg">+01 123 456 789</h2>
+                        </div>
+
+                        {/* Toggle Button */}
+                        <button
+                        onClick={toggleMenu}
+                        className="lg:hidden text-white text-2xl mr-4"
+                        >
+                        {isMenuOpen ? "Close" : "Menu"}
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {isMenuOpen && (
+                    <div className="lg:hidden bg-gray-900 bg-opacity-90 fixed inset-0 flex flex-col justify-center items-center z-50">
+                        <button
+                        onClick={toggleMenu}
+                        className="absolute top-6 right-6 text-white text-3xl"
+                        >
+                        &times; {/* Close button */}
+                        </button>
+                        <div>
+                        <div className="text-white text-xl hover:text-amber-500 pb-3">
+                        <Link to = '/' >Home</Link>
+                        </div>
+                        
+                        <ul className="text-white text-xl space-y-4">
+                            
+                        {[ "Projects", "About", "Pages", "Blog", "Contact"].map(
+                            (item, idx) => (
+                            <li key={idx}>
+                                <Link
+                                to={`/${item.toLowerCase()}`}
+                                className="hover:text-amber-500"
+                                onClick={toggleMenu} // Close the menu after clicking a link
+                                >
+                                {item}
+                                </Link>
+                            </li>
+                            )
+                        )}
+                        </ul>
+                    </div>
+                    </div>  
+                    )}
+
+                <div className="mt-28 sm:mt-28 lg:ml-40 sm:ml-32 ml-28">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white">
+                    OUR PROJECTS
+                </h1>
+                <h2 className="text-lg sm:text-xl lg:text-2xl text-white mt-2">
+                    <Link to={"/"} className="hover:underline">Home</Link>{" "}
+                    <span className="text-amber-500">¬ Projects</span>
+                </h2>
+                </div>
+
+                    
+            {/* ---------------------first part ends--------------------- */}
+            </div>
+            
+
+
+        </div>
+    );
+}
+
+export default Projects;
